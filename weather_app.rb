@@ -1,4 +1,4 @@
-require './weather_data'
+require_relative 'lib/weather_data'
 
 api = WeatherData.new
 api.connect('http://api.openweathermap.org')

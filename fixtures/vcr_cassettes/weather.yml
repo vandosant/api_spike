@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.openweathermap.org/data/2.5/find?q=Denver&units=imperial
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Tue, 06 May 2014 21:52:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: |
+        {"message":"accurate","cod":"200","count":1,"list":[{"id":5419384,"name":"Denver","coord":{"lon":-104.984703,"lat":39.739151},"main":{"temp":72.37,"temp_min":72.37,"temp_max":72.37,"pressure":800.36,"sea_level":1005.66,"grnd_level":800.36,"humidity":27},"dt":1399412064,"wind":{"speed":5.79,"deg":161.502},"sys":{"country":"US"},"clouds":{"all":44},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}]}]}
+    http_version: 
+  recorded_at: Tue, 06 May 2014 21:52:55 GMT
+recorded_with: VCR 2.9.0

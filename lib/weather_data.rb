@@ -15,30 +15,38 @@ class WeatherData
     response = @conn.get("/data/2.5/find", :q => city, :units => 'imperial')
     weather_data = JSON.parse(response.body)
 
-    puts '=' * 23
-    puts "Forecast for #{weather_data['list'].first['name']}"
-    puts '=' * 23
-    puts " #{weather_data['list'].first['weather'].first['description']}."
-    puts " High: #{weather_data['list'].first['main']['temp_max'].to_i}F,"
-    puts " Low: #{weather_data['list'].first['main']['temp_min'].to_i}F,"
-    puts " Wind: #{weather_data['list'].first['wind']['speed']}mph"
-    puts '=' * 26
+    lines = []
+
+    lines << '=' * 23
+    lines << "Forecast for #{weather_data['list'].first['name']}"
+    lines << '=' * 23
+    lines << " #{weather_data['list'].first['weather'].first['description']}."
+    lines << " High: #{weather_data['list'].first['main']['temp_max'].to_f}F,"
+    lines << " Low: #{weather_data['list'].first['main']['temp_min'].to_f}F,"
+    lines << " Wind: #{weather_data['list'].first['wind']['speed']}mph"
+    lines << '=' * 26
+
+    lines.join("\n")
   end
 
   def get_forecast(city, length_in_days)
     response = @conn.get("/data/2.5/forecast/daily", :q => city, :cnt => length_in_days, :units => 'imperial')
     forecast_data = JSON.parse(response.body)
 
-    puts '=' * 26
-    puts "#{forecast_data['cnt']}-Day Forecast for #{forecast_data['city']['name']}"
-    puts '=' * 26
+    lines = []
+
+    lines << '=' * 26
+    lines << "#{forecast_data['cnt']}-Day Forecast for #{forecast_data['city']['name']}"
+    lines << '=' * 26
     forecast_data['list'].each_with_index do |day_data, index|
-      puts (Date.today + index)
-      puts " #{day_data['weather'].first['description'].capitalize}."
-      puts " High: #{day_data['temp']['max'].to_i}F,"
-      puts " Low: #{day_data['temp']['min'].to_i}F,"
-      puts " Wind: #{day_data['speed']}mph"
+      lines << (Date.today + index)
+      lines << " #{day_data['weather'].first['description'].capitalize}."
+      lines << " High: #{day_data['temp']['max'].to_f}F,"
+      lines << " Low: #{day_data['temp']['min'].to_f}F,"
+      lines << " Wind: #{day_data['speed']}mph"
     end
-    puts '=' * 26
+    lines << '=' * 26
+
+    lines.join("\n")
   end
 end
